@@ -29,6 +29,7 @@ PROTEINS = {
     "ABCC1": "../data/raw/ABCC1_raw.csv",
 }
 
+
 def run_pipeline(protein_name: str, input_path: str) -> pd.DataFrame:
     """
     Exécute les 3 étapes de traitement pour une protéine.
@@ -66,6 +67,7 @@ def run_pipeline(protein_name: str, input_path: str) -> pd.DataFrame:
 
     return df
 
+
 def main():
     os.makedirs("../data/processed", exist_ok=True)
 
@@ -81,6 +83,7 @@ def main():
         print(f"✅ Sauvegardé : {output_path}")
 
     print("\n🎉 Pipeline terminé !")
+
 
 if __name__ == "__main__":
     main()
