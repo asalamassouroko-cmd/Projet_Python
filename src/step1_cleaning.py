@@ -10,6 +10,56 @@ Règles :
 """
 
 import pandas as pd
+import pandas as pd
+import sys
+
+
+def nettoyage_etape1(nom_fichier):
+    
+    dtf = pd.read_csv(nom_fichier)
+
+    print("Fichier traité :", nom_fichier)
+    print("Nombre de lignes au départ :", len(dtf))
+
+    # Suppression des Probe
+    dtf = dtf[dtf["Activity"] != "Probe"]
+
+    # Suppression des Active sans Activity_Value
+    dtf = dtf[~((dtf["Activity"] == "Active") & (dtf["Activity_Value"].isna()))]
+
+    print("Nombre de lignes après nettoyage :", len(dtf))
+
+    
+    nom_sortie = nom_fichier.replace(".csv", "_clean_step1.csv")
+
+    dtf.to_csv(nom_sortie, index=False)
+
+    print("Fichier enregistré :", nom_sortie)
+
+    return dtf
+
+
+
+if len(sys.argv) < 2:
+    print("Erreur : donner un fichier CSV en argument")
+else:
+    fichier = sys.argv[1]
+    nettoyage_etape1(fichier)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def clean_data(df: pd.DataFrame) -> pd.DataFrame:
